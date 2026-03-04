@@ -30,7 +30,7 @@ public class Main {
             libraryService.borrowBook("P101", "ISBN103");
             //patronService.patronSummary("P101");
             //patronService.searchPatronById("P101");
-            //libraryService.returnBook("P101", "ISBN101");
+            libraryService.returnBook("P101", "ISBN101");
             patronService.searchPatronById("P101");
 
             //libraryService.borrowBook("P101", "ISBN101");
