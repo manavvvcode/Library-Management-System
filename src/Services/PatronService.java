@@ -44,6 +44,8 @@ public class PatronService {
             System.out.println("Here is the information for patron id " + id);
             System.out.println("Name - " + patronMap.get(id).getName());
             System.out.println("Email - " + patronMap.get(id).getEmail());
+            System.out.println("patron's borrow count is - " + patronMap.get(id).borrowCount());
+            System.out.println("patron's overdue count is - " + patronMap.get(id).overdueCount());
             System.out.println("Borrowing history:");
             if (patronMap.get(id).getPatronBorrowingHistory().isEmpty()) {
                 System.out.println(patronMap.get(id).getName() + " doesnt have a borrowing history.");
@@ -59,12 +61,14 @@ public class PatronService {
                     System.out.println("Status - " + h.getStatus());
                     System.out.println("----------x-------------");
                 }
+
             }
             return;
         }
         throw new InvalidIdException("Patron id doesn't exist");
     }
-//huuyu
+
+    //huuyu
     public Patron returnPatronById(String id) throws InvalidIdException {
         if (patronMap.containsKey(id)) {
             return patronMap.get(id);
@@ -80,6 +84,24 @@ public class PatronService {
                 }
             }
         }
+    }
+
+    public void patronSummary(String id) throws InvalidIdException {
+        if (patronMap.containsKey(id)) {
+            if (patronMap.get(id).isBorrowHistoryEmpty()) {
+                System.out.println("borrow history is empty.");
+                return;
+            }
+            for (History x : patronMap.get(id).getPatronBorrowingHistory()) {
+                System.out.println("Book borrowed - " + x.getBook().getTitle());
+                System.out.println("Book borrow date - " + x.getBorrowDate());
+                System.out.println("Book return date - " + x.getReturnDate());
+                System.out.println("Book due date - " + x.getDueDate());
+                System.out.println("Book status - " + x.getStatus());
+            }
+            return;
+        }
+        throw new InvalidIdException("patron id doesn't exist.");
     }
 
 }

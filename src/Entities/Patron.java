@@ -11,6 +11,7 @@ public class Patron {
         this.email = email;
         this.name = name;
         this.id = id;
+        this.patronBorrowingHistory=new ArrayList<>();
     }
 
     public String getId() {
